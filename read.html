@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>挺进报官网</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		/* 导航栏样式 */
+		.navbar {
+			overflow: hidden;
+			background-color: #333;
+			position: fixed;
+			top: 0;
+			width: 100%;
+		}
+
+		/* 导航栏链接样式 */
+		.navbar a {
+			float: left;
+			display: block;
+			color: white;
+			text-align: center;
+			padding: 14px 20px;
+			text-decoration: none;
+		}
+
+		/* 鼠标悬停链接样式 */
+		.navbar a:hover {
+			background-color: #ddd;
+			color: rgb(236, 123, 123);
+		}
+
+		/* 当前页面链接样式 */
+		.active {
+			background-color: #e61212;
+			color: white;
+		}
+	</style>
+    <script>
+        function write(f,s){
+            const fs = require('fs');
+            const file = 'f';
+
+            fs.writeFile(file, s, function(err) {
+                if (err) {
+                    console.error(err);
+                } else {
+                    console.log('File written!');
+                }
+            });
+        }
+        function read(f){
+            fetch(f)
+            .then(response => response.text())
+            .then(data => write(f,data));
+            const fs = require('fs');
+            const file = f;
+
+            fs.readFile(file, function(err, data) {
+                if (err) {
+                    console.error(err);
+                } else {
+                    console.log(data);
+                    document.write(data);
+                }
+            });
+
+        }
+        function main(){
+            const fs = require('fs');
+            const file = location.hash;
+
+            // 检查文件是否存在
+            fs.stat(file, function(err, stat) {
+                if(err == null) {
+                    read(file)
+                } else if(err.code == 'ENOENT') {
+                    window.location.replace("error.html");
+                } else {
+                    console.log('Error: ', err.code);
+                }
+            });
+
+        }
+    </script>
+</head >
+<body onclick="main()">
+
+<div class="navbar">
+  <a href="index.html">主页</a>
+  <a class="active" href="#news">新闻</a>
+  <a href="tellus.html">联系我们</a>
+  <a href="about.html">关于我们</a>
+</div>
+<h2>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</h2>
+<h1>┗|｀O′|┛ 嗷~~，这个页面还没有做好，下次再来吧！</h1>
+</body>
+</html>

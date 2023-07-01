@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>挺进报官网</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		/* 导航栏样式 */
+		.navbar {
+			overflow: hidden;
+			background-color: #333;
+			position: fixed;
+			top: 0;
+			width: 100%;
+		}
+
+		/* 导航栏链接样式 */
+		.navbar a {
+			float: left;
+			display: block;
+			color: white;
+			text-align: center;
+			padding: 14px 20px;
+			text-decoration: none;
+		}
+
+		/* 鼠标悬停链接样式 */
+		.navbar a:hover {
+			background-color: #ddd;
+			color: rgb(236, 123, 123);
+		}
+
+		/* 当前页面链接样式 */
+		.active {
+			background-color: #e61212;
+			color: white;
+		}
+	</style>
+    <script>
+        function read(hash){
+            window.location.replace("read.html"+hash);
+        }
+    </script>
+</head >
+<body>
+
+<div class="navbar">
+  <a href="index.html">主页</a>
+  <a class="active" href="#news">新闻</a>
+  <a href="tellus.html">联系我们</a>
+  <a href="about.html">关于我们</a>
+</div>
+<h2>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</h2>
+<h1>各期挺进报</h1>
+<p>这里有各期的挺进报，可以进行“研读”</p>
+<button onclick="read('#1')">第一期</button>
+<button onclick="read('#2')">第二期</button>
+<button onclick="read('#3')">第三期</button>
+<button onclick="read('#4')">第四期</button>
+<button onclick="read('#5')">第五期</button>
+<button onclick="read('#6')">第六期</button>
+</body>
+</html>
