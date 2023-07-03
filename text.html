@@ -1,22 +1,110 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Markdown to HTML</title>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+	<title>挺进报官网</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+        body {
+            background-image: url("a.jpg");
+            background-size: cover;
+        }
+
+		/* 导航栏样式 */
+		.navbar {
+			overflow: hidden;
+			background-color: #ffffff;
+			position: fixed;
+			top: 5px;
+			width: 60%;
+            height: 50px; 
+            border-radius: 10px;
+            opacity: 0.9;
+        }
+
+		/* 导航栏链接样式 */
+		.navbar a {
+			float: left;
+			display: block;
+			color: rgb(0, 0, 0);
+			text-align: center;
+			padding: 14px 20px;
+			text-decoration: none;
+		}
+
+		/* 鼠标悬停链接样式 */
+		.navbar a:hover {
+			background-color: #ddd;
+			color: rgb(0, 0, 0);
+            border-radius: 10px;
+		}
+
+		/* 当前页面链接样式 */
+		.active {
+			background-image: linear-gradient(to right, #8600d3, #e400ff, #ea00ff);
+			color: rgb(255, 255, 255);
+            border-radius: 10px;
+        }
+        
+        /* 正文样式 */
+        .content {
+            margin-top: 65px; /* 距离顶部的距离 */
+            margin-left: auto; /* 左右居中 */
+            margin-right: auto; /* 左右居中 */
+            width: 80%; /* 宽度 */
+            height: auto; /* 高度自适应 */
+            border-radius: 10px; /* 圆角 */
+            background-color: white; /* 背景色 */
+            padding-top: 20px; /* 上边距 */
+            padding-bottom: 20px; /* 下边距 */
+            padding-left: 30px; /* 左边距 */
+            padding-right: 30px; /* 右边距 */
+        }
+        .tcip {
+			margin-top: 20px; /* 距离顶部的距离 */
+            margin-left: auto; /* 左右居中 */
+            margin-right: auto; /* 左右居中 */
+            width: 95%; /* 宽度 */
+            height: auto; /* 高度自适应 */
+            border-radius: 10px; /* 圆角 */
+            background-color: rgb(243, 255, 137); /* 背景色 */
+            padding-top: 20px; /* 上边距 */
+            padding-bottom: 20px; /* 下边距 */
+            padding-left: 30px; /* 左边距 */
+            padding-right: 30px; /* 右边距 */
+            color:#000000;
+        }
+    </style>
+    <script>
+        function read(u){
+            window.location.replace(u)
+        }
+    </script>
 </head>
 <body>
-  <div id="markdown"></div>
 
-  <script>
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'example.md');
-    xhr.onload = () => {
-      const markdown = xhr.responseText;
-      const html = marked(markdown);
-      document.getElementById('markdown').innerHTML = html;
-    };
-    xhr.send();
-  </script>
+<div class="navbar">
+  <a class="active" href="index.html">主页</a>
+  <a href="news.html">新闻</a>
+  <a href="tellus.html">联系</a>
+  <a href="about.html">关于</a>
+</div>
+
+<div class="content">
+    <h1>欢迎来到挺进报</h1>
+    <p>这里是一个非常有趣的网站，我们会分享一些“进步”的事情和故事。</p>
+    <h3>想看最新的挺进报吗？这里有所有的挺进报！</h3>
+    <a href="news.html">猛戳进入</a>
+    <div class="tcip">
+        <h3>提示</h3>
+        <p>这是一个不稳定版本的页面，有很多意想不到的的错误，正式页面以发布版为准！BUG上报或发表意见：comisaw@outlook.com</p>
+        <a href="index.html">或回到正式版</a>
+    </div>
+</div>
+<div class="content">
+    <h3 onclick="read('https://www.163.com/v/video/VRRAG2LF7.html')">“毕业典礼”[点击查看]</h3>
+    <p onclick="read('https://www.163.com/v/video/VRRAG2LF7.html')">韩媒常用“人口悬崖”来形容本国的人口老龄化和少子化问题。近日，在韩国庆尚南道一岛中央的小学正在举行毕业典礼，然而今年的毕业生只有一人，原来应该由低年级学生朗读的颂词也改由已毕业49年的老校友代替。MBC电视台称，毕业典礼结束后，学校将面临关闭的命运。</p>
+    <h3 onclick="read('https://www.chinanews.com/tp/hd2011/2023/02-23/1060027.shtml')">“废墟上的希望”[点击查看]</h3>
+    <p onclick="read('https://www.chinanews.com/tp/hd2011/2023/02-23/1060027.shtml')">当地时间2023年2月22日，叙利亚阿勒颇，地震发生后，叙利亚艺术家在地震废墟上画画，描绘出缅怀与希望。此前报道，土耳其强震已造成土耳其、叙利亚两国超46000人死亡，预计死亡人数还将上升。</p>
+</div>
 </body>
 </html>
