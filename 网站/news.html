@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>挺进报官网</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="mod.css">
+	<script>
+		function read(u){
+			window.location.replace("read.html"+u)
+		}
+	</script>
+</head >
+<body>
+
+<div class="navbar">
+  <a href="index.html">主页</a>
+  <a class="active" href="news.html">新闻</a>
+  <a href="tellus.html">联系</a>
+  <a href="about.html">关于</a>
+</div>
+<div class="content">
+	<h1>各期挺进报</h1>
+	<p>这里有各期的挺进报，可以进行“研读”</p>
+	<button onclick="read('#1')">第一期</button>
+	<button onclick="read('#2')">第二期</button>
+	<button onclick="read('#3')">第三期</button>
+	<button onclick="read('#4')">第四期</button>
+	<button onclick="read('#5')">第五期</button>
+	<button onclick="read('#6')">第六期</button>
+	<div class="tcip">
+		<h3>提示</h3>
+		<p>挺进报暂未开通！</p>
+	</div>
+</div>
+
+</body>
+</html>

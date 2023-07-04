@@ -1,0 +1,123 @@
+body {
+    background-image: url("a.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* 导航栏样式 */
+.navbar {
+    overflow: hidden;
+    background-color: #ffffff;
+    position: fixed;
+    top: 5px;
+    width: 80%;
+    height: auto; 
+    border-radius: 10px;
+    opacity: 0.9;
+}
+
+/* 导航栏链接样式 */
+.navbar a {
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+/* 鼠标悬停链接样式 */
+.navbar a:hover {
+    background-color: #ddd;
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+}
+
+/* 当前页面链接样式 */
+.active {
+    background-image: linear-gradient(to right, #8600d3, #e400ff);
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+/* 正文样式 */
+.content {
+    margin-top: 70px; /* 距离顶部的距离 */
+    margin-left: auto; /* 左右居中 */
+    margin-right: auto; /* 左右居中 */
+    width: 80%; /* 宽度 */
+    height: auto; /* 高度自适应 */
+    border-radius: 10px; /* 圆角 */
+    background-color: white; /* 背景色 */
+    padding-top: 20px; /* 上边距 */
+    padding-bottom: 20px; /* 下边距 */
+    padding-left: 30px; /* 左边距 */
+    padding-right: 30px; /* 右边距 */
+}
+.word {
+    margin-top: 20px; /* 距离顶部的距离 */
+    margin-left: auto; /* 左右居中 */
+    margin-right: auto; /* 左右居中 */
+    width: 80%; /* 宽度 */
+    height: auto; /* 高度自适应 */
+    border-radius: 10px; /* 圆角 */
+    background-color: white; /* 背景色 */
+    padding-top: 20px; /* 上边距 */
+    padding-bottom: 20px; /* 下边距 */
+    padding-left: 30px; /* 左边距 */
+    padding-right: 30px; /* 右边距 */
+}
+.news {
+    margin-top: 20px; /* 距离顶部的距离 */
+    margin-left: auto; /* 左右居中 */
+    margin-right: auto; /* 左右居中 */
+    width: 80%; /* 宽度 */
+    height: auto; /* 高度自适应 */
+    border-radius: 10px; /* 圆角 */
+    background-image: linear-gradient(to right, #8600d3, #e400ff); /* 背景色 */
+    padding-top: 20px; /* 上边距 */
+    padding-bottom: 20px; /* 下边距 */
+    padding-left: 30px; /* 左边距 */
+    padding-right: 30px; /* 右边距 */
+    color:#ffffff;
+}
+.tcip {
+    margin-top: 20px; /* 距离顶部的距离 */
+    margin-left: auto; /* 左右居中 */
+    margin-right: auto; /* 左右居中 */
+    width: 80%; /* 宽度 */
+    height: auto; /* 高度自适应 */
+    border-radius: 10px; /* 圆角 */
+    background-color: rgb(243, 255, 137); /* 背景色 */
+    padding-top: 20px; /* 上边距 */
+    padding-bottom: 20px; /* 下边距 */
+    padding-left: 30px; /* 左边距 */
+    padding-right: 30px; /* 右边距 */
+}
+.error {
+    margin-top: 20px; /* 距离顶部的距离 */
+    margin-left: auto; /* 左右居中 */
+    margin-right: auto; /* 左右居中 */
+    width: 80%; /* 宽度 */
+    height: auto; /* 高度自适应 */
+    border-radius: 10px; /* 圆角 */
+    background-color: rgb(255, 0, 0); /* 背景色 */
+    padding-top: 20px; /* 上边距 */
+    padding-bottom: 20px; /* 下边距 */
+    padding-left: 30px; /* 左边距 */
+    padding-right: 30px; /* 右边距 */
+    color:#ffffff;
+}
+.error_t {
+    margin-top: 70px; /* 距离顶部的距离 */
+    margin-left: auto; /* 左右居中 */
+    margin-right: auto; /* 左右居中 */
+    width: 80%; /* 宽度 */
+    height: auto; /* 高度自适应 */
+    border-radius: 10px; /* 圆角 */
+    background-color: rgb(255, 0, 0); /* 背景色 */
+    padding-top: 20px; /* 上边距 */
+    padding-bottom: 20px; /* 下边距 */
+    padding-left: 30px; /* 左边距 */
+    padding-right: 30px; /* 右边距 */
+    color:#ffffff;
+}
