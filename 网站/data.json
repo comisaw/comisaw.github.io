@@ -2,8 +2,8 @@
     "sites": [
     { "name":"“毕业典礼”" , "word":"韩媒常用“人口悬崖”来形容本国的人口老龄化和少子化问题。近日，在韩国庆尚南道一岛中央的小学正在举行毕业典礼，然而今年的毕业生只有一人，原来应该由低年级学生朗读的颂词也改由已毕业49年的老校友代替。MBC电视台称，毕业典礼结束后，学校将面临关闭的命运。","url":"https://www.163.com/v/video/VRRAG2LF7.html" }, 
     { "name":"“废墟上的希望”" , "word":"当地时间2023年2月22日，叙利亚阿勒颇，地震发生后，叙利亚艺术家在地震废墟上画画，描绘出缅怀与希望。此前报道，土耳其强震已造成土耳其、叙利亚两国超46000人死亡，预计死亡人数还将上升。","url":"https://www.chinanews.com/tp/hd2011/2023/02-23/1060027.shtml" }, 
-    { "name":"菜鸟教程" , "word":"编程初学者的救星","url":"www.runoob.com" }, 
-    { "name":"google" , "word":"国外上网冲浪的最佳选择","url":"www.google.com" }, 
-    { "name":"微博" ,"word":"柴知道的所在地，有着全世界最差的搜索系统", "url":"www.weibo.com" }
+    { "name":"菜鸟教程" , "word":"编程初学者的救星","url":"https://www.runoob.com" }, 
+    { "name":"google" , "word":"国外上网冲浪的最佳选择","url":"https://www.google.com" }, 
+    { "name":"微博" ,"word":"[bilibili]柴知道的所在地，有着全世界最差的搜索系统", "url":"https://www.weibo.com" }
     ]
 }
