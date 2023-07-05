@@ -66,6 +66,16 @@ body {
     padding-left: 30px; /* 左边距 */
     padding-right: 30px; /* 右边距 */
 }
+.word h3:hover {
+    background-color: #ddd;
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+}
+.word p:hover {
+    background-color: #ddd;
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+}
 .news {
     margin-top: 20px; /* 距离顶部的距离 */
     margin-left: auto; /* 左右居中 */
@@ -121,3 +131,7 @@ body {
     padding-right: 30px; /* 右边距 */
     color:#ffffff;
 }
+iframe {
+    display: block;
+    margin: 0 auto;
+  }
