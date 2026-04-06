@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>✨ AI 灵犀物语 · 动态Galgame ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 强制浅色主题，忽略深色模式 */
+        body {
+            background: linear-gradient(145deg, #fff3f5 0%, #ffe4e9 100%);
+            font-family: 'Segoe UI', 'Poppins', 'Noto Sans CJK SC', 'Comic Sans MS', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #3f2e3a;
+        }
+
+        .game-container {
+            max-width: 1400px;
+            width: 100%;
+            background: rgba(255, 250, 245, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 48px 48px 32px 32px;
+            box-shadow: 0 20px 40px rgba(245, 150, 170, 0.25), 0 4px 12px rgba(0,0,0,0.05);
+            padding: 28px;
+            border: 2px solid #ffd9e2;
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-left: 12px;
+        }
+        .title h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ff96b9, #ff7ea5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+        .title span {
+            font-size: 2rem;
+        }
+
+        .split-panel {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .left-panel {
+            flex: 1.1;
+            min-width: 320px;
+            background: #fffbfc;
+            border-radius: 32px;
+            padding: 24px;
+            box-shadow: inset 0 2px 6px #ffeef2, 0 8px 18px #ffd2dc;
+            border: 1px solid #ffe3e8;
+        }
+        .right-panel {
+            flex: 1.9;
+            min-width: 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .config-group {
+            margin-bottom: 24px;
+        }
+        .config-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #b95b7a;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 40px;
+            border: 2px solid #ffc1d0;
+            background: #fff9fb;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            color: #3f2e3a;
+            font-family: inherit;
+            resize: vertical;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #ff8aae;
+            box-shadow: 0 0 0 4px #ffd9e6;
+        }
+
+        .cute-button {
+            background: #ffb1c7;
+            border: none;
+            color: #4a2f3a;
+            font-weight: 600;
+            padding: 12px 26px;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 0 #dd8ca0, 0 8px 18px #fec7d4;
+            cursor: pointer;
+            transition: 0.08s linear;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .cute-button:active {
+            transform: translateY(5px);
+            box-shadow: 0 2px 0 #dd8ca0, 0 8px 18px #fec7d4;
+        }
+        .cute-button.secondary {
+            background: #ffe2eb;
+            box-shadow: 0 4px 0 #dbb2bf;
+            color: #562f40;
+        }
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .novel-window {
+            background: #fff2f7;
+            border-radius: 42px;
+            padding: 32px 28px;
+            border: 3px solid #ffbfd3;
+            box-shadow: 0 12px 0 #e6a2b6, 0 20px 30px #ffd9e2;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+        }
+        .character-name {
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: #c06d8b;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .character-name span {
+            background: #ffe5ed;
+            padding: 6px 18px;
+            border-radius: 60px;
+            font-size: 1rem;
+        }
+        .dialogue {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #36212b;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 40px;
+            padding: 28px;
+            margin: 12px 0 22px 0;
+            border: 2px dashed #ffaec7;
+            min-height: 160px;
+            white-space: pre-wrap;
+            transition: all 0.2s;
+        }
+        .options-area {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        .option-btn {
+            background: #ffffffd9;
+            border: 2px solid #ffb3c6;
+            border-radius: 60px;
+            padding: 14px 24px;
+            font-size: 1rem;
+            text-align: left;
+            color: #421f31;
+            font-weight: 500;
+            box-shadow: 0 3px 0 #eba1b4;
+            transition: 0.05s linear;
+            cursor: pointer;
+        }
+        .option-btn:hover {
+            background: #ffeef4;
+            border-color: #ff88aa;
+        }
+        .option-btn:active {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+        .option-btn.disabled, .option-btn:disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .history-panel {
+            background: #ffecf1;
+            border-radius: 28px;
+            padding: 18px;
+            border: 2px solid #ffb7c8;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .history-title {
+            font-weight: 600;
+            color: #a0506b;
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+        .history-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .history-tag {
+            background: white;
+            border-radius: 40px;
+            padding: 8px 18px;
+            border: 1px solid #ff98b7;
+            font-size: 0.85rem;
+            color: #672e46;
+            cursor: pointer;
+            transition: 0.1s;
+            max-width: 220px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .history-tag:hover {
+            background: #ffdae6;
+            border-color: #ff6f97;
+        }
+
+        .stream-log {
+            background: #fef2f7;
+            border-radius: 28px;
+            padding: 16px;
+            font-size: 0.85rem;
+            border: 2px solid #ffb7c8;
+            color: #402a32;
+            max-height: 150px;
+            overflow: auto;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+
+        hr {
+            border: 1px solid #ffccdd;
+            margin: 24px 0 16px;
+        }
+        #importFile {
+            display: none;
+        }
+        .thinking {
+            color: #d97a9b;
+            font-style: italic;
+            animation: pulse 1.2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="game-container">
+    <div class="title">
+        <span>🌸</span>
+        <h1>AI 灵犀物语 · 无限分支剧场</h1>
+        <span>✨</span>
+    </div>
+
+    <div class="split-panel">
+        <!-- 左侧设定区 -->
+        <div class="left-panel">
+            <div class="config-group">
+                <div class="config-label"><i>🔑</i> DeepSeek API 密钥</div>
+                <input type="password" id="apiKey" placeholder="sk-xxxxxxxxxxxxxx">
+            </div>
+            <div class="config-group">
+                <div class="config-label"><i>🎭</i> 角色名称</div>
+                <input type="text" id="charName" placeholder="如：星野 琉璃" value="星野 琉璃">
+            </div>
+            <div class="config-group">
+                <div class="config-label"><i>📝</i> 角色简介</div>
+                <textarea id="charBio" rows="2">17岁，神秘转校生，喜欢星空和猫咪，外表冷淡内心温柔。</textarea>
+            </div>
+            <div class="config-group">
+                <div class="config-label"><i>🌌</i> 剧情简介</div>
+                <textarea id="plotIntro" rows="2">夏日天台，偶然相遇，她眼中藏着流星的故事，你能否揭开她的秘密？</textarea>
+            </div>
+            <div class="button-group">
+                <button class="cute-button" id="startGameBtn"><span>✨</span> 开始新游戏</button>
+                <button class="cute-button secondary" id="exportBtn"><span>📥</span> 导出存档</button>
+                <button class="cute-button secondary" id="importBtn"><span>📤</span> 导入存档</button>
+                <input type="file" id="importFile" accept="application/json">
+            </div>
+            <hr>
+            <div class="config-group">
+                <div class="config-label"><i>⏳</i> AI 交互日志 (流式)</div>
+                <div class="stream-log" id="streamLog">等待开始新游戏~</div>
+            </div>
+        </div>
+
+        <!-- 右侧游戏区 -->
+        <div class="right-panel">
+            <div class="novel-window">
+                <div class="character-name" id="charNameDisplay">星野 琉璃 <span id="sceneHint">✨ 启程</span></div>
+                <div class="dialogue" id="dialogueText">点击「开始新游戏」，AI将为你编织独一无二的故事...</div>
+                <div class="options-area" id="optionsContainer"></div>
+            </div>
+            <div class="history-panel">
+                <div class="history-title">📜 回溯之书 (点击跳转)</div>
+                <div class="history-items" id="historyList"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; color:#b2627f; padding:0 8px;">
+                <span id="nodeHint">当前段落</span>
+                <span id="endingHint"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ---------- 动态 Galgame 核心 ----------
+    (function() {
+        // DOM 元素
+        const apiKeyInput = document.getElementById('apiKey');
+        const charNameInput = document.getElementById('charName');
+        const charBioInput = document.getElementById('charBio');
+        const plotIntroInput = document.getElementById('plotIntro');
+        const startGameBtn = document.getElementById('startGameBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const importBtn = document.getElementById('importBtn');
+        const importFile = document.getElementById('importFile');
+        const streamLogDiv = document.getElementById('streamLog');
+        const charNameDisplaySpan = document.getElementById('charNameDisplay');
+        const dialogueTextDiv = document.getElementById('dialogueText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const historyListDiv = document.getElementById('historyList');
+        const nodeHintSpan = document.getElementById('nodeHint');
+        const endingHintSpan = document.getElementById('endingHint');
+        const sceneHintSpan = document.getElementById('sceneHint');
+
+        // ---------- 游戏状态 ----------
+        let currentHistory = [];      // 存储每段剧情对象: { text: string, options: [] }，用于回溯
+        let currentText = "";         // 当前显示的剧情文本
+        let currentOptions = [];       // 当前选项列表 [{ text, nextHint }] 或空（结局）
+        let isGenerating = false;      // 是否正在生成中
+        let abortController = null;    // 中断fetch
+
+        // 角色设定
+        let roleName = charNameInput.value.trim() || "星野 琉璃";
+        let roleBio = charBioInput.value.trim();
+        let gamePlotIntro = plotIntroInput.value.trim();
+
+        // 辅助函数：更新UI
+        function updateGameUI() {
+            charNameDisplaySpan.innerText = roleName;
+            dialogueTextDiv.innerText = currentText || "✨ 故事正在编织...";
+            optionsContainer.innerHTML = "";
+            if (currentOptions && currentOptions.length > 0) {
+                currentOptions.forEach((opt, idx) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.innerText = opt.text;
+                    btn.addEventListener('click', () => onOptionSelected(opt));
+                    optionsContainer.appendChild(btn);
+                });
+                endingHintSpan.innerText = "";
+            } else {
+                // 结局状态
+                const endMsg = document.createElement('div');
+                endMsg.style.padding = '20px';
+                endMsg.style.color = '#a34e6b';
+                endMsg.style.fontWeight = 'bold';
+                endMsg.innerText = '⭐ 结局 · 感谢游玩 ⭐\n你可以回溯到之前的节点，或点击「开始新游戏」开启另一段缘分。';
+                optionsContainer.appendChild(endMsg);
+                endingHintSpan.innerText = '【结局】';
+            }
+            // 更新回溯列表
+            renderHistoryList();
+            nodeHintSpan.innerText = `第 ${currentHistory.length + 1} 段`;
+        }
+
+        // 渲染回溯按钮
+        function renderHistoryList() {
+            historyListDiv.innerHTML = '';
+            if (currentHistory.length === 0) {
+                historyListDiv.innerHTML = '<div class="history-tag" style="opacity:0.6;">暂无记录</div>';
+                return;
+            }
+            currentHistory.forEach((item, idx) => {
+                const tag = document.createElement('div');
+                tag.className = 'history-tag';
+                const shortText = item.text.length > 20 ? item.text.slice(0, 20) + '…' : item.text;
+                tag.innerText = `📖 ${shortText}`;
+                tag.title = item.text;
+                tag.addEventListener('click', () => {
+                    if (isGenerating) {
+                        alert("请等待当前生成完成后再回溯");
+                        return;
+                    }
+                    // 回溯到该节点：截断历史，恢复当时的剧情和选项
+                    currentHistory = currentHistory.slice(0, idx);
+                    const target = currentHistory[idx]; // 实际上slice后 idx 就是最后一个
+                    if (currentHistory.length > 0) {
+                        const last = currentHistory[currentHistory.length - 1];
+                        currentText = last.text;
+                        currentOptions = [...last.options]; // 深拷贝选项
+                    } else {
+                        // 如果回到开头，需要重新请求初始剧情？ 但此时没有记录了，应重新开始
+                        alert("回溯到起点，请重新开始游戏");
+                        resetToNewGame();
+                        return;
+                    }
+                    updateGameUI();
+                });
+                historyListDiv.appendChild(tag);
+            });
+        }
+
+        // 重置为新游戏（清空历史，请求初始剧情）
+        async function resetToNewGame() {
+            // 获取最新设定
+            roleName = charNameInput.value.trim() || "星野 琉璃";
+            roleBio = charBioInput.value.trim();
+            gamePlotIntro = plotIntroInput.value.trim();
+            const apiKey = apiKeyInput.value.trim();
+            if (!apiKey) {
+                alert("请填写 DeepSeek API 密钥");
+                return;
+            }
+            // 清空状态
+            currentHistory = [];
+            currentText = "✨ AI 正在构思序章，请稍候...";
+            currentOptions = [];
+            updateGameUI();
+            // 生成初始剧情
+            await generateInitialScene(apiKey);
+        }
+
+        // 生成初始场景（系统提示要求开头）
+        async function generateInitialScene(apiKey) {
+            if (isGenerating) return;
+            isGenerating = true;
+            abortController = new AbortController();
+            optionsContainer.innerHTML = '<div class="thinking">✨ 灵犀正在编织世界线 ✨</div>';
+            streamLogDiv.innerText = "📡 连接 AI，生成初始剧情...\n";
+
+            try {
+                const systemPrompt = `你是一位顶尖的Galgame剧本作家，风格细腻、二次元、治愈。请根据以下设定创作一段故事开篇。
+角色名：${roleName}
+角色简介：${roleBio}
+故事背景：${gamePlotIntro}
+
+你需要返回一个严格的JSON对象，包含开场剧情文本和2~3个选项（结局场景选项可以为空数组）。格式如下：
+{
+  "text": "这里是一段优美的剧情叙述，渲染氛围，角色出场，引出悬念。",
+  "options": [
+    { "text": "选项文字1" },
+    { "text": "选项文字2" }
+  ]
+}
+注意：选项仅需text字段，用于下一步生成后续。如果是结局，options为空数组。请只输出JSON，不要解释。`;
+
+                const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: 'deepseek-chat',
+                        messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: '请生成开篇' }],
+                        stream: true,
+                        temperature: 0.9,
+                        max_tokens: 800
+                    }),
+                    signal: abortController.signal
+                });
+
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                let fullContent = '';
+                let receivedJson = false;
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    const chunk = decoder.decode(value, { stream: true });
+                    buffer += chunk;
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop() || '';
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = line.slice(6);
+                            if (data === '[DONE]') continue;
+                            try {
+                                const parsed = JSON.parse(data);
+                                const delta = parsed.choices?.[0]?.delta?.content || '';
+                                if (delta) {
+                                    fullContent += delta;
+                                    streamLogDiv.innerText = fullContent;
+                                    streamLogDiv.scrollTop = streamLogDiv.scrollHeight;
+                                }
+                            } catch (e) { /* 忽略不完整JSON */ }
+                        }
+                    }
+                }
+
+                // 提取JSON
+                const jsonMatch = fullContent.match(/\{[\s\S]*\}/);
+                if (!jsonMatch) throw new Error("AI返回内容未包含有效JSON");
+                const jsonObj = JSON.parse(jsonMatch[0]);
+                if (!jsonObj.text) throw new Error("剧情文本缺失");
+
+                currentText = jsonObj.text;
+                currentOptions = (jsonObj.options || []).map(opt => ({ text: opt.text, nextHint: opt.text }));
+                currentHistory = [];   // 初始剧情不放入历史？我们希望回溯可以回到初始，所以加入历史
+                currentHistory.push({ text: currentText, options: JSON.parse(JSON.stringify(currentOptions)) });
+                updateGameUI();
+                streamLogDiv.innerText += "\n✅ 序章生成完毕！";
+            } catch (err) {
+                if (err.name === 'AbortError') return;
+                console.error(err);
+                alert("生成初始剧情失败: " + err.message);
+                currentText = "抱歉，故事编织遇到了问题，请检查API密钥或稍后再试。";
+                currentOptions = [];
+                updateGameUI();
+            } finally {
+                isGenerating = false;
+                abortController = null;
+            }
+        }
+
+        // 处理用户选择选项
+        async function onOptionSelected(option) {
+            if (isGenerating) {
+                alert("请等待当前剧情生成完毕");
+                return;
+            }
+            const apiKey = apiKeyInput.value.trim();
+            if (!apiKey) {
+                alert("API密钥不能为空");
+                return;
+            }
+
+            // 将当前剧情和历史记录保存下来
+            // 注意：当前历史记录已经包含之前的剧情，我们要在生成新剧情前将当前剧情加入历史（如果还没加的话）
+            // 检查历史最后一条是否已经是当前剧情，防止重复
+            if (currentHistory.length === 0 || currentHistory[currentHistory.length-1].text !== currentText) {
+                currentHistory.push({ text: currentText, options: JSON.parse(JSON.stringify(currentOptions)) });
+            }
+
+            // 开始生成新剧情
+            isGenerating = true;
+            abortController = new AbortController();
+            optionsContainer.innerHTML = '<div class="thinking">✨ 命运之线继续编织... ✨</div>';
+            dialogueTextDiv.innerText = currentText + "\n\n[思考中...]";
+            streamLogDiv.innerText = "📡 AI 正在构思下一幕...\n";
+
+            // 构建上下文：角色设定 + 历史摘要 + 当前剧情 + 用户选择的选项
+            const historySummary = currentHistory.map((h, idx) => `[第${idx+1}幕] ${h.text}`).join('\n');
+            const userChoice = `玩家选择了选项：「${option.text}」`;
+
+            const systemPrompt = `你是一个Galgame剧本作家，延续当前故事。根据角色设定和剧情走向，生成后续剧情。
+
+【角色设定】
+名称：${roleName}
+简介：${roleBio}
+世界观基调：${gamePlotIntro}
+
+【历史剧情】
+${historySummary}
+
+【当前情境】
+上一段剧情结尾：${currentText}
+${userChoice}
+
+现在请延续故事，生成下一段剧情文本（描述场景、对话、心理等），并提供2~3个选项供玩家选择（如果适合结局，可以返回空选项数组）。
+返回JSON格式：
+{
+  "text": "新的剧情文本...",
+  "options": [ { "text": "选项1" }, { "text": "选项2" } ]
+}
+如果是结局，options为 []。只输出JSON。`;
+
+            try {
+                const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: 'deepseek-chat',
+                        messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: '请继续生成' }],
+                        stream: true,
+                        temperature: 0.9,
+                        max_tokens: 1000
+                    }),
+                    signal: abortController.signal
+                });
+
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                let fullContent = '';
+                let finalJson = null;
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    const chunk = decoder.decode(value, { stream: true });
+                    buffer += chunk;
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop() || '';
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = line.slice(6);
+                            if (data === '[DONE]') continue;
+                            try {
+                                const parsed = JSON.parse(data);
+                                const delta = parsed.choices?.[0]?.delta?.content || '';
+                                if (delta) {
+                                    fullContent += delta;
+                                    streamLogDiv.innerText = fullContent;
+                                    streamLogDiv.scrollTop = streamLogDiv.scrollHeight;
+                                }
+                            } catch (e) { /* 忽略 */ }
+                        }
+                    }
+                }
+
+                const jsonMatch = fullContent.match(/\{[\s\S]*\}/);
+                if (!jsonMatch) throw new Error("未返回有效JSON");
+                finalJson = JSON.parse(jsonMatch[0]);
+                if (!finalJson.text) throw new Error("缺少剧情文本");
+
+                // 更新当前剧情
+                currentText = finalJson.text;
+                currentOptions = (finalJson.options || []).map(opt => ({ text: opt.text, nextHint: opt.text }));
+                // 注意：不要重复添加当前剧情到历史，因为上面在生成前已经添加过了（上一段）
+                // 但新生成的剧情还未加入历史，需要在下一次选择前再加入。我们现在只更新显示，历史记录会在下一次选择前加入。
+                updateGameUI();
+                streamLogDiv.innerText += "\n✅ 新篇章生成完成！";
+            } catch (err) {
+                if (err.name === 'AbortError') return;
+                console.error(err);
+                alert("生成剧情失败: " + err.message);
+                currentText = "命运的丝线暂时中断，请重试或回溯。";
+                currentOptions = [];
+                updateGameUI();
+            } finally {
+                isGenerating = false;
+                abortController = null;
+            }
+        }
+
+        // 导出存档（保存所有设定、历史记录、当前剧情和选项）
+        function exportSave() {
+            if (!currentText && currentHistory.length === 0) {
+                alert("还没有游戏进度可导出");
+                return;
+            }
+            const saveData = {
+                version: 1,
+                roleName: roleName,
+                roleBio: roleBio,
+                gamePlotIntro: gamePlotIntro,
+                history: currentHistory,
+                currentText: currentText,
+                currentOptions: currentOptions,
+                apiKeyBackup: apiKeyInput.value.trim() // 可选，但出于安全可省略，此处保存便于恢复
+            };
+            const blob = new Blob([JSON.stringify(saveData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'galgame_save.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // 导入存档
+        function importSave(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    if (!data.version || !data.history) throw new Error("存档格式无效");
+                    roleName = data.roleName;
+                    roleBio = data.roleBio;
+                    gamePlotIntro = data.gamePlotIntro;
+                    currentHistory = data.history;
+                    currentText = data.currentText;
+                    currentOptions = data.currentOptions || [];
+                    // 同步界面输入框
+                    charNameInput.value = roleName;
+                    charBioInput.value = roleBio;
+                    plotIntroInput.value = gamePlotIntro;
+                    if (data.apiKeyBackup) apiKeyInput.value = data.apiKeyBackup;
+                    updateGameUI();
+                    streamLogDiv.innerText = "📀 存档导入成功，继续你的旅程吧！";
+                } catch (err) {
+                    alert("导入失败: " + err.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // 事件绑定
+        startGameBtn.addEventListener('click', async () => {
+            if (isGenerating) {
+                alert("请等待当前生成完成");
+                return;
+            }
+            await resetToNewGame();
+        });
+        exportBtn.addEventListener('click', exportSave);
+        importBtn.addEventListener('click', () => importFile.click());
+        importFile.addEventListener('change', (e) => {
+            if (e.target.files.length) importSave(e.target.files[0]);
+            importFile.value = '';
+        });
+
+        // 初始化提示（不自动开始）
+        updateGameUI();
+        streamLogDiv.innerText = "🌸 欢迎来到AI灵犀物语！点击「开始新游戏」输入API密钥即可开启你的专属故事。";
+    })();
+</script>
+</body>
+</html>
